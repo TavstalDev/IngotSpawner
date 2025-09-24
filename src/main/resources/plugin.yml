@@ -1,0 +1,9 @@
+main: io.github.tavstaldev.ingotSpawner.IngotSpawner
+version: '1.0.0'
+
+name: IngotSpawner
+api-version: '1.21'
+prefix: IngotSpawner
+authors: [ Tavstal ]
+description: Ingot spawner for MesterMC skypvp
+website: https://tavstaldev.github.io
