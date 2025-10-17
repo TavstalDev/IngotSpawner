@@ -7,3 +7,32 @@ prefix: IngotSpawner
 authors: [ Tavstal ]
 description: Ingot spawner for MesterMC skypvp
 website: https://tavstaldev.github.io
+
+commands:
+  ingot:
+    description: IngotSpawner main command
+    usage: /<command> <subcommand>
+    aliases: [ispa, ingotspawner]
+    permission: ingotspawner.commands.ingot
+    default: op
+    subcommands:
+      help:
+        description: Shows command info.
+        usage: /<command> help [page]
+        permission: ingotspawner.commands.help
+      version:
+        description: Shows the plugin's version.
+        usage: /<command> version
+        permission: ingotspawner.commands.version
+      reload:
+        description: Reloads the plugin settings and messages.
+        usage: /<command> reload
+        permission: ingotspawner.commands.reload
+      add:
+        description: Adds an ingot spawner spot.
+        usage: /<command> addlocation
+        permission: ingotspawner.commands.addlocation
+      remove:
+        description: Removes an ingot spawner spot.
+        usage: /<command> removelocation
+        permission: ingotspawner.commands.removelocation
