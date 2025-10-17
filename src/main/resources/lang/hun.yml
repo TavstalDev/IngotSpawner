@@ -1,5 +1,40 @@
 General:
   NoPermission: "%prefix% &cNincs jogosultságod ehhez."
+  Error: "%prefix% &cHiba történt."
 
+Commands:
+  ConsoleCaller: "%prefix% &cA parancsot csak játékosok használhatják."
+  UnknownError: "%prefix% &cIsmeretlen hiba történt. Kérlek, jelentsd!"
+  InGame: "%prefix% &cEzt a parancsot nem használhatod aktív játék közben."
+  Common:
+    InvalidPage: "%prefix% &cÉrvénytelen oldalszám."
+  Help:
+    Desc: "Információkat mutat a parancsokról."
+    Title: "&8&m        &r &bIngot&3Spawner &7Súgó &8&m    &r &7Oldal &3%current_page%&7/&3%max_page% &8&m        &r"
+    Info: |-
+      &r
+      &r  &c&l[]&r &8- &7Kötelező,   &e&l<>&r &8- &7Opcionális
+      &r
+    Line: "&r  &b/%command% %subcommand%&3%syntax% &8- &7%description%"
+    Bottom: |-
+      &r
+      &8&m                       &r %previous_btn%&3%current_page%&7/&3%max_page%%next_btn% &8&m                       &r
+    PrevBtn: "&b<< "
+    NextBtn: " &b>>"
+  Version:
+    Desc: "Megmutatja a plugin verzióját."
+    Current: "%prefix% &aA IngotSpawner '&3%version%&a' verzióját használod."
+    UpToDate: "%prefix% &aA IngotSpawner naprakész."
+    Outdated: "%prefix% &cA IngotSpawner elavult. Itt töltheted le: &e%link%"
+  Reload:
+    Desc: "Újratölti a plugin konfigurációját és üzeneteit."
+    Done: "%prefix% &aA plugin frissítve."
+  AddLocation:
+    Desc: "Hozzáad egy ingot spawner helyet."
+    Done: "%prefix% &aIngot spawner hely hozzáadva."
+  RemoveLocation:
+    Desc: "Eltávolít egy ingot spawner helyet."
+    NotFound: "%prefix% &cNincs ingot spawner ezen a helyen."
+    Done: "%prefix% &aIngot spawner hely eltávolítva."
 
 FileVersion: 1
