@@ -1,6 +1,7 @@
 General:
   NoPermission: "%prefix% &cNincs jogosultságod ehhez."
   Error: "%prefix% &cHiba történt."
+  IngotPickup: "%prefix% &aKaptál $%value%-t."
 
 Commands:
   ConsoleCaller: "%prefix% &cA parancsot csak játékosok használhatják."

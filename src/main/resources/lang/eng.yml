@@ -1,6 +1,7 @@
 General:
   NoPermission: "%prefix% &cYou do not have permission for this."
   Error: "%prefix% &cAn error occurred."
+  IngotPickup: "%prefix% &aYou have received $%value%."
 
 Commands:
   ConsoleCaller: "%prefix% &cOnly players can use this command, you idiot."
