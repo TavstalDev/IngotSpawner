@@ -3,36 +3,86 @@ package io.github.tavstaldev.ingotSpawner;
 import io.github.tavstaldev.ingotSpawner.commands.CommandIngot;
 import io.github.tavstaldev.ingotSpawner.events.PlayerEventListener;
 import io.github.tavstaldev.ingotSpawner.task.SpawnTask;
+import io.github.tavstaldev.ingotSpawner.util.EconomyUtils;
 import io.github.tavstaldev.minecorelib.PluginBase;
 import io.github.tavstaldev.minecorelib.core.PluginLogger;
 import io.github.tavstaldev.minecorelib.core.PluginTranslator;
 import org.bukkit.Bukkit;
 
+/**
+ * Main class for the IngotSpawner plugin.
+ * <p>
+ * This class extends `PluginBase` and serves as the entry point for the plugin.
+ * It handles initialization, configuration loading, event registration, and task scheduling.
+ * </p>
+ */
 public final class IngotSpawner extends PluginBase {
+    /**
+     * Singleton instance of the plugin.
+     */
     public static IngotSpawner Instance;
+
+    /**
+     * Manages the storage and retrieval of ingot spawn locations.
+     */
     private IngotLocations locations;
+
+    /**
+     * Task responsible for spawning ingots at predefined locations.
+     */
     private SpawnTask spawnTask;
 
+    /**
+     * Retrieves the plugin's custom logger.
+     *
+     * @return The `PluginLogger` instance.
+     */
     public static PluginLogger logger() {
         return Instance.getCustomLogger();
     }
 
+    /**
+     * Retrieves the plugin's translator for handling localizations.
+     *
+     * @return The `PluginTranslator` instance.
+     */
     public static PluginTranslator translator() {
         return Instance.getTranslator();
     }
 
+    /**
+     * Retrieves the plugin's configuration.
+     *
+     * @return The `IngotSpawnerConfig` instance.
+     */
     public static IngotSpawnerConfig config() {
         return (IngotSpawnerConfig) Instance._config;
     }
 
+    /**
+     * Retrieves the ingot spawn locations manager.
+     *
+     * @return The `IngotLocations` instance.
+     */
     public static IngotLocations getLocations() {
         return Instance.locations;
     }
 
+    /**
+     * Constructor for the `IngotSpawner` class.
+     * Initializes the plugin with the update URL.
+     */
     public IngotSpawner() {
         super(false, "https://github.com/TavstalDev/IngotSpawner/releases/latest");
     }
 
+    /**
+     * Called when the plugin is enabled.
+     * <p>
+     * This method initializes the plugin, loads configurations, registers commands,
+     * event listeners, and tasks, and checks for updates.
+     * </p>
+     */
     @Override
     public void onEnable() {
         Instance = this;
@@ -46,6 +96,17 @@ public final class IngotSpawner extends PluginBase {
         // Load localizations.
         if (!_translator.load()) {
             _logger.error("Failed to load localizations... Unloading...");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
+
+        // Register Economy
+        _logger.debug("Hooking into Vault...");
+        if (EconomyUtils.setupEconomy())
+            _logger.info("Economy plugin found and hooked into Vault.");
+        else
+        {
+            _logger.warn("Economy plugin not found. Unloading...");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
@@ -81,11 +142,24 @@ public final class IngotSpawner extends PluginBase {
         }
     }
 
+    /**
+     * Called when the plugin is disabled.
+     * <p>
+     * This method performs cleanup tasks and logs the plugin's unloading.
+     * </p>
+     */
     @Override
     public void onDisable() {
         _logger.info(String.format("%s has been successfully unloaded.", getProjectName()));
     }
 
+    /**
+     * Reloads the plugin's configuration, localizations, and tasks.
+     * <p>
+     * This method cancels the current spawn task, reloads the configuration and localizations,
+     * and schedules a new spawn task.
+     * </p>
+     */
     public void reload() {
         _logger.info(String.format("Reloading %s...", getProjectName()));
         _logger.debug("Reloading localizations...");

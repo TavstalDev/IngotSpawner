@@ -7,28 +7,49 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+/**
+ * Configuration class for the IngotSpawner plugin.
+ * <p>
+ * This class extends `ConfigurationBase` to manage the `config.yml` file,
+ * which contains general plugin settings and ingot definitions.
+ * It provides methods to load default values, retrieve ingots by material,
+ * and select random ingots based on their weights.
+ * </p>
+ */
 public class IngotSpawnerConfig extends ConfigurationBase {
+
+    /**
+     * Constructor for the `IngotSpawnerConfig` class.
+     * Initializes the configuration file `config.yml`.
+     */
     public IngotSpawnerConfig() {
         super(IngotSpawner.Instance, "config.yml", null);
     }
 
-    // General
+    // General plugin settings
     public String locale, prefix;
     public boolean usePlayerLocale, checkForUpdates, debug;
 
-    // Ingots
+    // Set of custom ingots defined in the configuration
     public Set<Ingot> ingots;
 
+    /**
+     * Loads default values for the configuration if none exist.
+     * <p>
+     * This method initializes general plugin settings and ingot definitions.
+     * If no ingots are defined, it creates default entries for gold, diamond, and emerald ingots.
+     * </p>
+     */
     @Override
     protected void loadDefaults() {
-        // General
+        // General settings
         locale = resolveGet("locale", "eng");
         usePlayerLocale = resolveGet("usePlayerLocale", true);
         checkForUpdates = resolveGet("checkForUpdates", true);
         debug = resolveGet("debug", false);
         prefix = resolveGet("prefix", "&bIngots&3Spawner &8»");
 
-        // Ingots
+        // Initialize ingots
         ingots = new LinkedHashSet<>();
         if (this.get("ingots") == null) {
             resolve("ingots", new LinkedHashMap<String, Object>(Map.of(
@@ -38,6 +59,7 @@ public class IngotSpawnerConfig extends ConfigurationBase {
             )));
         }
 
+        // Load ingot definitions from the configuration
         var ingotConfigs = this.getConfigurationSection("ingots");
         if (ingotConfigs == null) {
             return;
@@ -58,21 +80,35 @@ public class IngotSpawnerConfig extends ConfigurationBase {
         }
     }
 
+    /**
+     * Retrieves a custom ingot by its material type.
+     *
+     * @param material The `Material` to search for.
+     * @return The corresponding `Ingot` object, or `null` if not found.
+     */
     public @Nullable Ingot getIngotByMaterial(Material material) {
         for (Ingot ingot : ingots) {
-            if (ingot.getMaterial() == material) {
+            if (ingot.material() == material) {
                 return ingot;
             }
         }
         return null;
     }
 
+    /**
+     * Selects a random ingot based on their weights.
+     * <p>
+     * The weights of the ingots are used to determine the probability of selection.
+     * </p>
+     *
+     * @return A randomly selected `Ingot` object.
+     */
     public Ingot getRandomIngot() {
-        int totalWeight = ingots.stream().mapToInt(Ingot::getWeight).sum();
+        int totalWeight = ingots.stream().mapToInt(Ingot::weight).sum();
         int randomWeight = new Random().nextInt(totalWeight);
         int currentWeight = 0;
         for (Ingot ingot : ingots) {
-            currentWeight += ingot.getWeight();
+            currentWeight += ingot.weight();
             if (randomWeight < currentWeight) {
                 return ingot;
             }
