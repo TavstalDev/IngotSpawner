@@ -2,7 +2,7 @@
 
 ![Release (latest by date)](https://img.shields.io/github/v/release/TavstalDev/IngotSpawner?style=plastic-square)
 ![Workflow Status](https://img.shields.io/github/actions/workflow/status/TavstalDev/IngotSpawner/ghrelease.yml?branch=stable&label=build&style=plastic-square)
-![License](https://img.shields.io/github/license/TavstalDev/IngotSpawner?style=plastic-square)
+![License](https://img.shields.io/github/license/TavstalDev/IngotSpawner)
 ![Downloads](https://img.shields.io/github/downloads/TavstalDev/IngotSpawner/total?style=plastic-square)
 ![Issues](https://img.shields.io/github/issues/TavstalDev/IngotSpawner?style=plastic-square)
 
