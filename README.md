@@ -17,6 +17,12 @@ When a player picks up an ingot, they receive a configurable amount of money.
 - `/ingot add` - Sets a new ingot spawn point at the player's current location.
 - `/ingot remove` - Removes the ingot spawn point closest to the player.
 
+## Dependencies
+
+To ensure the plugin functions correctly, your server must have the following plugins installed:
+
+* **[Vault](https://www.spigotmc.org/resources/vault.34315/)**: Required for economy compatibility.
+
 ## Contributing
 
 I welcome contributions! If you have ideas for features, bug fixes, or improvements, please consider contributing to the project.
