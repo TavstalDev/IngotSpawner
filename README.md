@@ -39,4 +39,4 @@ This project is licensed under the **GNU General Public License v3.0**. You can 
 
 ## Contact
 
-For any questions, bug reports, or feature requests, please use the [GitHub issue tracker](https://github.com/TavstalDev/OpenChat/issues).
+For any questions, bug reports, or feature requests, please use the [GitHub issue tracker](https://github.com/TavstalDev/BedWarsGUI/issues).
