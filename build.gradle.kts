@@ -11,6 +11,7 @@ plugins {
 val javaVersion: String by project
 val paperApiVersion: String by project
 val mineCoreLibVersion: String by project
+val vaultApiVersion: String by project
 
 // Configure Java toolchain and compatibility settings
 java {
@@ -28,12 +29,18 @@ repositories {
         name = "papermc"
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
+    maven {
+        url = uri("https://jitpack.io") // JitPack repository
+    }
 }
 
 // Define project dependencies
 dependencies {
     // Paper API for Minecraft server development
     compileOnly("io.papermc.paper:paper-api:${paperApiVersion}")
+    compileOnly("com.github.MilkBowl:VaultAPI:${vaultApiVersion}") {
+        exclude(group = "org.bukkit", module = "bukkit")
+    }
 
     // Custom library for core functionality
     implementation(files("libs/MineCoreLib-${mineCoreLibVersion}.jar"))
