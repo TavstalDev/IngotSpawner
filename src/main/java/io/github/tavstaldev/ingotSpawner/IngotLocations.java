@@ -45,6 +45,8 @@ public class IngotLocations extends ConfigurationBase {
         }
 
         var rawData = getStringList("locations");
+        if (data == null)
+            data = new ArrayList<>(); // For some reason data can be null here, even if initialized above.
         for (var entry : rawData) {
             data.add(deserializeLocation(entry));
         }
@@ -56,6 +58,8 @@ public class IngotLocations extends ConfigurationBase {
      * @param location The `Location` object to be added.
      */
     public void addLocation(Location location) {
+        if (data == null)
+            return;
         data.add(location);
         saveLocations();
     }
@@ -71,6 +75,9 @@ public class IngotLocations extends ConfigurationBase {
      * @return `true` if a location was removed, `false` otherwise.
      */
     public boolean removeLocation(Location location) {
+        if (data == null)
+            return false;
+
         var result = data.removeIf(loc -> loc.getWorld().equals(location.getWorld())
                 && loc.distanceSquared(location) < 4);
         saveLocations();
@@ -84,6 +91,9 @@ public class IngotLocations extends ConfigurationBase {
      * </p>
      */
     private void saveLocations() {
+        if (data == null)
+            return;
+
         List<String> serializedData = new ArrayList<>();
         for (var loc : data) {
             serializedData.add(serializeLocation(loc));
