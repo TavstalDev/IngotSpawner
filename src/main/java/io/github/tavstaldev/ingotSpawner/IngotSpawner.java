@@ -2,6 +2,7 @@ package io.github.tavstaldev.ingotSpawner;
 
 import io.github.tavstaldev.ingotSpawner.commands.CommandIngot;
 import io.github.tavstaldev.ingotSpawner.events.PlayerEventListener;
+import io.github.tavstaldev.ingotSpawner.metrics.Metrics;
 import io.github.tavstaldev.ingotSpawner.task.SpawnTask;
 import io.github.tavstaldev.ingotSpawner.util.EconomyUtils;
 import io.github.tavstaldev.minecorelib.PluginBase;
@@ -124,6 +125,15 @@ public final class IngotSpawner extends PluginBase {
         }
         spawnTask = new SpawnTask();
         spawnTask.runTaskTimer(this, 0L, 20 * 60 * 5);
+
+        // Metrics
+        try {
+            @SuppressWarnings("unused") Metrics metrics = new Metrics(this, 27763);
+        }
+        catch (Exception ex)
+        {
+            _logger.error("Failed to start Metrics: " + ex.getMessage());
+        }
 
         _logger.ok(String.format("%s has been successfully loaded.", getProjectName()));
 
