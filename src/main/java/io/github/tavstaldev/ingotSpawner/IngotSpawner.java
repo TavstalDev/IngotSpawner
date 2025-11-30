@@ -178,6 +178,9 @@ public final class IngotSpawner extends PluginBase {
         _logger.debug("Reloading configuration...");
         this._config.load();
         _logger.debug("Configuration reloaded.");
+        _logger.debug("Reloading ingot locations...");
+        locations.load();
+        _logger.debug("Ingot locations reloaded.");
 
         if (spawnTask != null && !spawnTask.isCancelled()) {
             spawnTask.cancel();
